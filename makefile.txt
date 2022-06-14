@@ -1,0 +1,40 @@
+# Makefile para tarefa2
+
+# Nome de projeto
+PROJ_NAME=tarefa2
+
+# Arquivos .cpp 
+CPP_SOURCE=$(wildcard *.cpp)
+
+# Arquivos .h
+H_SOURCE=$(wildcard *.h)
+
+# Arquivos obj
+OBJ=$(C_SOURCE:.cpp=.o)
+
+# Compilador
+CC=gcc
+
+# Flags
+CC_FLAGS=-c         \
+         -W         \
+         -Wall      \
+         -ansi      \
+         -pedantic
+
+# Compilar e Linkar
+
+all: $(PROJ_NAME)
+
+$(PROJ_NAME): $(OBJ)
+	$(CC) -o $@ $^
+
+%.o: %.c %.h
+	$(CC) -o $@ $< $(CC_FLAGS)
+
+main.o: main.c $(H_SOURCE)
+	$(CC) -o $@ $< $(CC_FLAGS)
+
+clean:
+	rm -rf *.o $(PROJ_NAME) *~
+
